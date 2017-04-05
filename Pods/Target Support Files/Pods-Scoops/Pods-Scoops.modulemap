@@ -1,0 +1,6 @@
+framework module Pods_Scoops {
+  umbrella header "Pods-Scoops-umbrella.h"
+
+  export *
+  module * { export * }
+}
