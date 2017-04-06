@@ -7,36 +7,45 @@
 //
 
 import UIKit
-
+import Firebase
 
 class LoginViewController: UIViewController {
 
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
 
 
     @IBAction func doAnonimoLogin(_ sender: Any) {
+        makeLogout()
         
-        performSegue(withIdentifier: "loginOk", sender: nil)
+        FIRAuth.auth()?.signInAnonymously(completion: { (user, error) in
+            if let _ = error {
+                print(error?.localizedDescription)
+                return
+            }
+            print(user?.uid)
+            self.performSegue(withIdentifier: "loginOk", sender: nil)
+
+        })
     }
     
     @IBAction func doFacebookLogin(_ sender: Any) {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    //MARK: - Utils
+    fileprivate func makeLogout() {
+        if let _ = FIRAuth.auth()?.currentUser {
+            do{
+                try FIRAuth.auth()?.signOut()
+            }catch let error {
+                print(error)
+            }
+        }
     }
-    */
 
 }

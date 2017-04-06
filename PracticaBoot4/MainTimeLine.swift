@@ -12,6 +12,8 @@ import Firebase
 class MainTimeLine: UITableViewController {
     
     var postRef : FIRDatabaseReference!
+    var handle: FIRAuthStateDidChangeListenerHandle!
+
 
     var model : [Posts] = []
     let cellIdentier = "POSTSCELL"
@@ -94,6 +96,15 @@ extension MainTimeLine {
     
     func setupFireBase(){
         postRef = FIRDatabase.database().reference().child("Posts")
+        
+        handle = FIRAuth.auth()?.addStateDidChangeListener({ (auth, user) in
+            guard let user = user else {return}
+            if (user.isAnonymous){
+                print("El usuario ANONIMO logado es \(user.uid)")
+            }else{
+                print("El usuario logado es \(user.uid)")
+            }
+        })
         
     }
     

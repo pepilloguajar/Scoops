@@ -20,6 +20,7 @@
 		9223BA4D1E96356D00C3B923 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9223BA4C1E96356D00C3B923 /* Posts.swift */; };
 		9223BA4F1E96766800C3B923 /* iTunesArtwork@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9223BA4E1E96766800C3B923 /* iTunesArtwork@3x.png */; };
 		9225C3601E968CDA00692545 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9225C35F1E968CDA00692545 /* LoginViewController.swift */; };
+		9225C36A1E96A62400692545 /* CreateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9225C3691E96A62400692545 /* CreateUserViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		9223BA4C1E96356D00C3B923 /* Posts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
 		9223BA4E1E96766800C3B923 /* iTunesArtwork@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@3x.png"; sourceTree = "<group>"; };
 		9225C35F1E968CDA00692545 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		9225C3691E96A62400692545 /* CreateUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateUserViewController.swift; sourceTree = "<group>"; };
 		E8A4C264289D511C58A16017 /* Pods_Scoops.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Scoops.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -97,7 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				5D931D001E83F5D1005051E9 /* MainTimeLine.swift */,
-				9225C35F1E968CDA00692545 /* LoginViewController.swift */,
+				9225C36B1E96A63600692545 /* Login/Create User */,
 				5D931D081E8414BB005051E9 /* All users */,
 				5D931D091E8414CA005051E9 /* Auth Users */,
 			);
@@ -147,6 +149,15 @@
 				9223BA4C1E96356D00C3B923 /* Posts.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		9225C36B1E96A63600692545 /* Login/Create User */ = {
+			isa = PBXGroup;
+			children = (
+				9225C35F1E968CDA00692545 /* LoginViewController.swift */,
+				9225C3691E96A62400692545 /* CreateUserViewController.swift */,
+			);
+			name = "Login/Create User";
 			sourceTree = "<group>";
 		};
 		AD5700C27539785A68E3950B /* Frameworks */ = {
@@ -295,6 +306,7 @@
 				9225C3601E968CDA00692545 /* LoginViewController.swift in Sources */,
 				5D931D051E83F773005051E9 /* AuthorPostList.swift in Sources */,
 				9223BA4D1E96356D00C3B923 /* Posts.swift in Sources */,
+				9225C36A1E96A62400692545 /* CreateUserViewController.swift in Sources */,
 				5D931CE61E83EEEA005051E9 /* AppDelegate.swift in Sources */,
 				5D931D031E83F67C005051E9 /* PostReview.swift in Sources */,
 				5D931D071E83F7BA005051E9 /* NewPostController.swift in Sources */,
@@ -415,6 +427,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = LZF7U2LEB4;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = PracticaBoot4/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jj.com.scoops;
@@ -429,6 +445,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = LZF7U2LEB4;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = PracticaBoot4/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jj.com.scoops;
