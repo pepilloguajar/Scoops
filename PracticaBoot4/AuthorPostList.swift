@@ -7,12 +7,16 @@
 //
 
 import UIKit
+import Firebase
 
 class AuthorPostList: UITableViewController {
 
+    var postRef : FIRDatabaseReference!
+
+    
     let cellIdentifier = "POSTAUTOR"
     
-    var model = ["test1", "test2"]
+    var model : [Posts] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +30,14 @@ class AuthorPostList: UITableViewController {
         self.refreshControl?.addTarget(self, action: #selector(hadleRefresh(_:)), for: UIControlEvents.valueChanged)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupFireBase()
+        pullModel()
+    }
+    
     func hadleRefresh(_ refreshControl: UIRefreshControl) {
+        pullModel()
         refreshControl.endRefreshing()
     }
     
@@ -48,7 +59,7 @@ class AuthorPostList: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        cell.textLabel?.text = model[indexPath.row]
+        cell.textLabel?.text = model[indexPath.row].title
     
         return cell
     }
@@ -66,49 +77,51 @@ class AuthorPostList: UITableViewController {
     }
 
    
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
+
+
+
+
+//MARK: - Firebase métodos
+extension AuthorPostList {
+    
+    func setupFireBase(){
+        postRef = FIRDatabase.database().reference().child("Posts")
+        
+    }
+    
+    func pullModel(){
+        
+        postRef.observe(.childAdded, with: { (snap) in
+            print(snap)
+            //Construyo modelo
+            self.model = []
+            for post in snap.children{
+                let aPost = Posts(snap: post as? FIRDataSnapshot)
+                self.model.append(aPost)
+            }
+            self.model = self.model.filter({$0.author == "Pepito"})
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+            
+        }) { (error) in
+            print(error)
+        }
+        
+        
+    }
+    
+    
+    
+}
+
+
+
+
+
+
+

@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import Firebase
 
 class MainTimeLine: UITableViewController {
+    
+    var postRef : FIRDatabaseReference!
 
-    var model = ["post1", "post2"]
+    var model : [Posts] = []
     let cellIdentier = "POSTSCELL"
     
     override func viewDidLoad() {
@@ -24,7 +27,16 @@ class MainTimeLine: UITableViewController {
         self.refreshControl?.addTarget(self, action: #selector(hadleRefresh(_:)), for: UIControlEvents.valueChanged)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.setupFireBase()
+        self.pullModel()
+        
+    }
+    
+    
     func hadleRefresh(_ refreshControl: UIRefreshControl) {
+        pullModel()
         refreshControl.endRefreshing()
     }
     override func didReceiveMemoryWarning() {
@@ -48,7 +60,8 @@ class MainTimeLine: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentier, for: indexPath)
 
-        cell.textLabel?.text = model[indexPath.row]
+        cell.textLabel?.text = model[indexPath.row].title
+
 
         return cell
     }
@@ -67,8 +80,71 @@ class MainTimeLine: UITableViewController {
         if segue.identifier == "ShowRatingPost" {
             let vc = segue.destination as! PostReview
             // aqui pasamos el item selecionado
+            let index = (sender as! IndexPath).row
+            vc.model = model[index]
+            print(vc.model.title)
         }
     }
 
 
 }
+
+//MARK: - Firebase métodos
+extension MainTimeLine {
+    
+    func setupFireBase(){
+        postRef = FIRDatabase.database().reference().child("Posts")
+        
+    }
+    
+    func pullModel(){
+        
+        postRef.observe(.childAdded, with: { (snap) in
+            print(snap)
+            //Construyo modelo
+            self.model = []
+            for post in snap.children{
+                let aPost = Posts(snap: post as? FIRDataSnapshot)
+                self.model.append(aPost)
+            }
+            self.model = self.model.filter({$0.status})
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+            
+        }) { (error) in
+            print(error)
+        }
+        
+        postRef.observe(.childChanged, with: { (snap) in
+            print(snap)
+            //Construyo modelo
+            self.model = []
+            for post in snap.children{
+                let aPost = Posts(snap: post as? FIRDataSnapshot)
+                self.model.append(aPost)
+            }
+            
+            self.model = self.model.filter({$0.status})
+
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+            
+        }) { (error) in
+            print(error)
+        }
+        
+        
+    }
+    
+    
+    
+}
+
+
+
+
+

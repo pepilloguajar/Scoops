@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class PostReview: UIViewController {
 
@@ -14,16 +15,23 @@ class PostReview: UIViewController {
     @IBOutlet weak var imagePost: UIImageView!
     @IBOutlet weak var postTxt: UITextField!
     @IBOutlet weak var titleTxt: UITextField!
+    @IBOutlet weak var loaderImage: UIActivityIndicatorView!
+    
+    var model : Posts!
+    
+    var postRef : FIRDatabaseReference!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setupUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     @IBAction func rateAction(_ sender: Any) {
         print("\((sender as! UISlider).value)")
@@ -31,14 +39,36 @@ class PostReview: UIViewController {
 
     @IBAction func ratePost(_ sender: Any) {
     }
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    
+    //MARK: - UI
+    func setupUI() {
+        
+        guard let model = self.model else {return}
+        self.titleTxt.text = model.title
+        self.postTxt.text = model.description
+        downloadImage()
+        
     }
-    */
+    
+    func downloadImage(){
+        guard let urlImage = model.urlImg else {return}
+        guard let url = URL(string: urlImage) else {return}
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let _ = error{
+                print("\(error?.localizedDescription)")
+                return
+            }
+            guard let data = data else {return}
+            let image = UIImage(data: data)
+            DispatchQueue.main.async {
+                self.imagePost.image = image
+                self.loaderImage.isHidden = true
+            }
+            
+        }
+        task.resume()
+    }
 
 }

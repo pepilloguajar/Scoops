@@ -17,6 +17,9 @@
 		5D931D071E83F7BA005051E9 /* NewPostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D931D061E83F7BA005051E9 /* NewPostController.swift */; };
 		8B1AD8E53BF90C41F5EC27D2 /* Pods_Scoops.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8A4C264289D511C58A16017 /* Pods_Scoops.framework */; };
 		9223BA4A1E950B7700C3B923 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9223BA491E950B7700C3B923 /* GoogleService-Info.plist */; };
+		9223BA4D1E96356D00C3B923 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9223BA4C1E96356D00C3B923 /* Posts.swift */; };
+		9223BA4F1E96766800C3B923 /* iTunesArtwork@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9223BA4E1E96766800C3B923 /* iTunesArtwork@3x.png */; };
+		9225C3601E968CDA00692545 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9225C35F1E968CDA00692545 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +36,9 @@
 		6015C01B8E1907E93D850E4A /* Pods-Scoops.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Scoops.release.xcconfig"; path = "Pods/Target Support Files/Pods-Scoops/Pods-Scoops.release.xcconfig"; sourceTree = "<group>"; };
 		7EC82A9F632D5F795B94A1B7 /* Pods-Scoops.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Scoops.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Scoops/Pods-Scoops.debug.xcconfig"; sourceTree = "<group>"; };
 		9223BA491E950B7700C3B923 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9223BA4C1E96356D00C3B923 /* Posts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
+		9223BA4E1E96766800C3B923 /* iTunesArtwork@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@3x.png"; sourceTree = "<group>"; };
+		9225C35F1E968CDA00692545 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E8A4C264289D511C58A16017 /* Pods_Scoops.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Scoops.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -69,6 +75,7 @@
 		5D931CE41E83EEEA005051E9 /* Scoops */ = {
 			isa = PBXGroup;
 			children = (
+				9223BA4B1E96354C00C3B923 /* Models */,
 				5D931CF71E83F069005051E9 /* AppDelegate */,
 				5D931CF81E83F076005051E9 /* ViewControllers */,
 				5D931CF91E83F087005051E9 /* Storyboards */,
@@ -90,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				5D931D001E83F5D1005051E9 /* MainTimeLine.swift */,
+				9225C35F1E968CDA00692545 /* LoginViewController.swift */,
 				5D931D081E8414BB005051E9 /* All users */,
 				5D931D091E8414CA005051E9 /* Auth Users */,
 			);
@@ -108,6 +116,7 @@
 		5D931CFB1E83F0A8005051E9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9223BA4E1E96766800C3B923 /* iTunesArtwork@3x.png */,
 				5D931CEC1E83EEEA005051E9 /* Assets.xcassets */,
 				5D931CF11E83EEEA005051E9 /* Info.plist */,
 				9223BA491E950B7700C3B923 /* GoogleService-Info.plist */,
@@ -130,6 +139,14 @@
 				5D931D061E83F7BA005051E9 /* NewPostController.swift */,
 			);
 			name = "Auth Users";
+			sourceTree = "<group>";
+		};
+		9223BA4B1E96354C00C3B923 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9223BA4C1E96356D00C3B923 /* Posts.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		AD5700C27539785A68E3950B /* Frameworks */ = {
@@ -213,6 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D931CFD1E83F110005051E9 /* TimeLine.storyboard in Resources */,
+				9223BA4F1E96766800C3B923 /* iTunesArtwork@3x.png in Resources */,
 				9223BA4A1E950B7700C3B923 /* GoogleService-Info.plist in Resources */,
 				5D931CF01E83EEEA005051E9 /* LaunchScreen.storyboard in Resources */,
 				5D931CED1E83EEEA005051E9 /* Assets.xcassets in Resources */,
@@ -274,7 +292,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9225C3601E968CDA00692545 /* LoginViewController.swift in Sources */,
 				5D931D051E83F773005051E9 /* AuthorPostList.swift in Sources */,
+				9223BA4D1E96356D00C3B923 /* Posts.swift in Sources */,
 				5D931CE61E83EEEA005051E9 /* AppDelegate.swift in Sources */,
 				5D931D031E83F67C005051E9 /* PostReview.swift in Sources */,
 				5D931D071E83F7BA005051E9 /* NewPostController.swift in Sources */,

@@ -7,12 +7,20 @@
 //
 
 import UIKit
+import Firebase
+typealias completionUploadMedia = (_: String?) -> Void
 
 class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var titlePostTxt: UITextField!
     @IBOutlet weak var textPostTxt: UITextField!
     @IBOutlet weak var imagePost: UIImageView!
+    
+    // Firebase properties
+    var postRef : FIRDatabaseReference!
+    var storageRef : FIRStorageReference!
+    
+    
     
     var isReadyToPublish: Bool = false
     var imageCaptured: UIImage! {
@@ -24,7 +32,8 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        setupFirebaseReferences()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,16 +50,10 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
 
     @IBAction func savePostInCloud(_ sender: Any) {
         // preparado para implementar codigo que persita en el cloud 
+        newPost(title: titlePostTxt.text!, description: textPostTxt.text!, status: isReadyToPublish, author: "Pepito", imgData: UIImageJPEGRepresentation(imagePost.image!, 0.5))
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
+    
 
     // MARK: - funciones para la camara
     internal func pushAlertCameraLibrary() -> UIAlertController {
@@ -106,6 +109,64 @@ extension NewPostController {
 }
 
 
+// MARK: - Metodos para Firebase
+extension NewPostController {
+    
+    func setupFirebaseReferences(){
+        postRef = FIRDatabase.database().reference().child("Posts")
+        storageRef = FIRStorage.storage().reference(forURL: "gs://scoops-b41b8.appspot.com").child("media")
+        
+    }
+    
+    
+    func newPost(title: String, description: String, status: Bool, author: String, imgData: Data! = nil){
+        let key = postRef.child("articulos").childByAutoId().key
+        
+        
+        let post : [String : Any] = ["title" : title, "description" : description, "status": status, "author" : author]
+        let recordInFB = ["\(key)" : post]
+
+        postRef.child("articulos").updateChildValues(recordInFB)
+        
+        if let _ = imgData{
+            self.uploadMedia(data: imgData, name: key, completionHandler: { (urlDownload) in
+                guard let urlImage = urlDownload else {return}
+                let urlToPost = ["urlImage" : urlImage]
+                self.postRef.child("articulos").child(key).updateChildValues(urlToPost)
+                self.navigationController?.popViewController(animated: true)
+            })
+            
+        }
+        
+    }
+    
+    
+    func uploadMedia(data : Data, name: String, completionHandler : @escaping completionUploadMedia) {
+    
+        let imgRef = storageRef.child("\(name).jpg")
+        let metadata = FIRStorageMetadata()
+        metadata.contentType = "image/jpeg"
+        let uploadTask = imgRef.put(data, metadata: metadata) { metadata, error in
+            if (error != nil) {
+                completionHandler(nil)
+            } else {
+                let downloadURL = metadata!.downloadURL()
+                completionHandler(downloadURL?.absoluteString)
+            }
+        }
+        
+        
+    }
+    
+    
+    func uploadData(){
+        
+        
+    }
+    
+    
+    
+}
 
 
 

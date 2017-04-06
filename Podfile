@@ -9,5 +9,7 @@ target 'Scoops' do
 
   # Pods for Firebase
   pod 'Firebase/Core'
+  pod 'Firebase/Database'
+  pod 'Firebase/Storage'
 
 end
