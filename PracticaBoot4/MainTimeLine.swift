@@ -47,6 +47,7 @@ class MainTimeLine: UITableViewController {
 
 
     @IBAction func doLogout(_ sender: Any) {
+        FIRAnalytics.logEvent(withName: "Logout", parameters: nil)
         makeLogout()
         performSegue(withIdentifier: "doLogout", sender: nil)
         
@@ -108,6 +109,8 @@ class MainTimeLine: UITableViewController {
 extension MainTimeLine {
     
     func setupFireBase(){
+        FIRAnalytics.setScreenName("Listado de noticias", screenClass: "MainTImeLine")
+
         postRef = FIRDatabase.database().reference().child("Posts")
         
         handle = FIRAuth.auth()?.addStateDidChangeListener({ (auth, user) in

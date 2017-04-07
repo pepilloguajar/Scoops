@@ -28,7 +28,8 @@ class PostReview: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        FIRAnalytics.setScreenName("Detalle/Review Post", screenClass: "PostReview")
+
         
     }
 
@@ -38,6 +39,8 @@ class PostReview: UIViewController {
     }
 
     @IBAction func ratePost(_ sender: Any) {
+        FIRAnalytics.logEvent(withName: "Valoracion", parameters: ["puntuacion" : rateSlider.value as NSObject])
+
         print(rateSlider.value)
         self.valorarFB(value: rateSlider.value )
         

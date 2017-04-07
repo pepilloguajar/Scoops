@@ -18,12 +18,15 @@ class LoginEmailPassViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
+        FIRAnalytics.setScreenName("Login Usuario y contraseña", screenClass: "LoginEmailPassViewController")
 
         // Do any additional setup after loading the view.
     }
 
    
     @IBAction func doLogin(_ sender: Any) {
+        FIRAnalytics.logEvent(withName: "Login Email/Pass", parameters: nil)
+
         
         guard let email = emailText.text, let pass = passTxt.text else{
             self.showAlert(message: "Rellena todos los campos")

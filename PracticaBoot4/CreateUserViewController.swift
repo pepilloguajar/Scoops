@@ -18,12 +18,16 @@ class CreateUserViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
+        FIRAnalytics.setScreenName("Crear Usuario", screenClass: "createUser")
+
 
         // Do any additional setup after loading the view.
     }
 
 
     @IBAction func doRegistro(_ sender: Any) {
+        FIRAnalytics.logEvent(withName: "Registro", parameters: nil)
+
         
         guard let email = emailText.text, let pass = passText.text else {
             self.showAlert(message: "Rellena todos los campos")

@@ -97,6 +97,8 @@ class AuthorPostList: UITableViewController {
 extension AuthorPostList {
     
     func setupFireBase(){
+        FIRAnalytics.setScreenName("Noticias de autor", screenClass: "AuthorPostList")
+
         postRef = FIRDatabase.database().reference().child("Posts")
         
     }

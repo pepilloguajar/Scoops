@@ -33,16 +33,14 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.loader.isHidden = true
         self.hideKeyboardWhenTappedAround()
 
         setupFirebaseReferences()
         
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+
     
     @IBAction func takePhoto(_ sender: Any) {
         self.present(pushAlertCameraLibrary(), animated: true, completion: nil)
@@ -52,7 +50,9 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
     }
 
     @IBAction func savePostInCloud(_ sender: Any) {
-        // preparado para implementar codigo que persita en el cloud 
+        FIRAnalytics.logEvent(withName: "Crear post", parameters: nil)
+
+        // preparado para implementar codigo que persita en el cloud
         if let image = imagePost.image {
             newPost(title: titlePostTxt.text!, description: textPostTxt.text!, status: isReadyToPublish, author: user.email!, imgData: UIImageJPEGRepresentation(imagePost.image!, 0.5))
         }else{
@@ -121,6 +121,8 @@ extension NewPostController {
 extension NewPostController {
     
     func setupFirebaseReferences(){
+        FIRAnalytics.setScreenName("Nueva Noticia", screenClass: "NewPostController")
+
         postRef = FIRDatabase.database().reference().child("Posts")
         storageRef = FIRStorage.storage().reference(forURL: "gs://scoops-b41b8.appspot.com").child("media")
         
@@ -181,12 +183,6 @@ extension NewPostController {
                 completionHandler(downloadURL?.absoluteString)
             }
         }
-        
-        
-    }
-    
-    
-    func uploadData(){
         
         
     }
