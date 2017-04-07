@@ -18,7 +18,7 @@ class PostReview: UIViewController {
     @IBOutlet weak var loaderImage: UIActivityIndicatorView!
     
     var model : Posts!
-    
+    var user : FIRUser!
     var postRef : FIRDatabaseReference!
     
     override func viewDidLoad() {
@@ -38,6 +38,10 @@ class PostReview: UIViewController {
     }
 
     @IBAction func ratePost(_ sender: Any) {
+        print(rateSlider.value)
+        self.valorarFB(value: rateSlider.value )
+        
+        
     }
 
     
@@ -53,7 +57,10 @@ class PostReview: UIViewController {
     }
     
     func downloadImage(){
-        guard let urlImage = model.urlImg else {return}
+        guard let urlImage = model.urlImg else {
+            self.loaderImage.isHidden = true
+            return
+        }
         guard let url = URL(string: urlImage) else {return}
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let _ = error{
@@ -71,4 +78,26 @@ class PostReview: UIViewController {
         task.resume()
     }
 
+}
+
+
+//FIREBASE
+extension PostReview {
+    
+    func valorarFB(value : Float){
+        postRef = FIRDatabase.database().reference().child("PostsReviews")
+        let key = model.refInCloud!.key
+        let valoracion = [ user.uid : ["puntos" : value]]
+        let recordInFB = ["\(key)" : valoracion ]
+        
+        postRef.child("valoraciones").updateChildValues(recordInFB) { (error, referece) in
+            if let _ = error {
+                self.showAlert(message: "Error al guardar tu valoración")
+                return
+            }
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    
 }

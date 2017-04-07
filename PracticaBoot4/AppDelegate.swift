@@ -26,17 +26,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
-
-
-// Extensión para cerrar el teclado al hacer tap  -- buscar el mejor sitio para poner esto
-extension UIViewController {
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    
-    func dismissKeyboard() {
-        view.endEditing(true)
-    }
-}

@@ -22,6 +22,7 @@
 		9225C3601E968CDA00692545 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9225C35F1E968CDA00692545 /* LoginViewController.swift */; };
 		9225C36A1E96A62400692545 /* CreateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9225C3691E96A62400692545 /* CreateUserViewController.swift */; };
 		92EBEA8C1E97CA4D008931DF /* LoginEmailPassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EBEA8B1E97CA4D008931DF /* LoginEmailPassViewController.swift */; };
+		92EBEA911E97E393008931DF /* ExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EBEA901E97E393008931DF /* ExtensionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		9225C35F1E968CDA00692545 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9225C3691E96A62400692545 /* CreateUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateUserViewController.swift; sourceTree = "<group>"; };
 		92EBEA8B1E97CA4D008931DF /* LoginEmailPassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginEmailPassViewController.swift; sourceTree = "<group>"; };
+		92EBEA901E97E393008931DF /* ExtensionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionViewController.swift; sourceTree = "<group>"; };
 		E8A4C264289D511C58A16017 /* Pods_Scoops.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Scoops.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -79,6 +81,7 @@
 		5D931CE41E83EEEA005051E9 /* Scoops */ = {
 			isa = PBXGroup;
 			children = (
+				92EBEA8D1E97E2D6008931DF /* Utils */,
 				9223BA4B1E96354C00C3B923 /* Models */,
 				5D931CF71E83F069005051E9 /* AppDelegate */,
 				5D931CF81E83F076005051E9 /* ViewControllers */,
@@ -161,6 +164,14 @@
 				92EBEA8B1E97CA4D008931DF /* LoginEmailPassViewController.swift */,
 			);
 			name = "Login/Create User";
+			sourceTree = "<group>";
+		};
+		92EBEA8D1E97E2D6008931DF /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				92EBEA901E97E393008931DF /* ExtensionViewController.swift */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		AD5700C27539785A68E3950B /* Frameworks */ = {
@@ -312,6 +323,7 @@
 				9225C36A1E96A62400692545 /* CreateUserViewController.swift in Sources */,
 				5D931CE61E83EEEA005051E9 /* AppDelegate.swift in Sources */,
 				5D931D031E83F67C005051E9 /* PostReview.swift in Sources */,
+				92EBEA911E97E393008931DF /* ExtensionViewController.swift in Sources */,
 				5D931D071E83F7BA005051E9 /* NewPostController.swift in Sources */,
 				5D931D011E83F5D1005051E9 /* MainTimeLine.swift in Sources */,
 				92EBEA8C1E97CA4D008931DF /* LoginEmailPassViewController.swift in Sources */,

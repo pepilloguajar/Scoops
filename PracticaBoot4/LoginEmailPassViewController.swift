@@ -47,17 +47,6 @@ class LoginEmailPassViewController: UIViewController {
     }
 
     
-    func showAlert(message : String) {
-        
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "Cerrar", style: .cancel, handler: { (action) in
-            
-        }))
-        
-        self.present(alert, animated: true, completion: nil)
-
-        
-    }
+    
 
 }

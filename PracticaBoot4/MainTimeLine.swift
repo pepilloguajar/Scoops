@@ -13,6 +13,7 @@ class MainTimeLine: UITableViewController {
     
     var postRef : FIRDatabaseReference!
     var handle: FIRAuthStateDidChangeListenerHandle!
+    var userAuthenticated: FIRUser!
 
     @IBOutlet weak var btnMisPosts: UIBarButtonItem!
     
@@ -92,8 +93,12 @@ class MainTimeLine: UITableViewController {
             // aqui pasamos el item selecionado
             let index = (sender as! IndexPath).row
             vc.model = model[index]
-            print(vc.model.title)
+            vc.user = self.userAuthenticated
+        }else if segue.identifier == "AddPost"{
+            let vc = segue.destination as! AuthorPostList
+            vc.user = self.userAuthenticated
         }
+        
     }
 
 
@@ -107,7 +112,7 @@ extension MainTimeLine {
         
         handle = FIRAuth.auth()?.addStateDidChangeListener({ (auth, user) in
             guard let user = user else {return}
-            
+            self.userAuthenticated = user
             if (user.isAnonymous){
                 print("El usuario ANONIMO logado es \(user.uid)")
                 self.btnMisPosts.isEnabled = false

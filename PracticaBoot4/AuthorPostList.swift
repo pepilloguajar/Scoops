@@ -17,6 +17,7 @@ class AuthorPostList: UITableViewController {
     let cellIdentifier = "POSTAUTOR"
     
     var model : [Posts] = []
+    var user : FIRUser?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,6 +79,14 @@ class AuthorPostList: UITableViewController {
 
    
 
+    
+    //MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "addNewPost"{
+            let vc = segue.destination as! NewPostController
+            vc.user = self.user
+        }
+    }
 
 }
 
@@ -102,7 +111,7 @@ extension AuthorPostList {
                 let aPost = Posts(snap: post as? FIRDataSnapshot)
                 self.model.append(aPost)
             }
-            self.model = self.model.filter({$0.author == "Pepito"})
+            self.model = self.model.filter({$0.author == self.user?.email})
             
             DispatchQueue.main.async {
                 self.tableView.reloadData()

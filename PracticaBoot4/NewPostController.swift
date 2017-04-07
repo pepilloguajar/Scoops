@@ -15,10 +15,12 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
     @IBOutlet weak var titlePostTxt: UITextField!
     @IBOutlet weak var textPostTxt: UITextField!
     @IBOutlet weak var imagePost: UIImageView!
+    @IBOutlet weak var loader: UIActivityIndicatorView!
     
     // Firebase properties
     var postRef : FIRDatabaseReference!
     var storageRef : FIRStorageReference!
+    var user : FIRUser!
     
     
     
@@ -51,7 +53,12 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
 
     @IBAction func savePostInCloud(_ sender: Any) {
         // preparado para implementar codigo que persita en el cloud 
-        newPost(title: titlePostTxt.text!, description: textPostTxt.text!, status: isReadyToPublish, author: "Pepito", imgData: UIImageJPEGRepresentation(imagePost.image!, 0.5))
+        if let image = imagePost.image {
+            newPost(title: titlePostTxt.text!, description: textPostTxt.text!, status: isReadyToPublish, author: user.email!, imgData: UIImageJPEGRepresentation(imagePost.image!, 0.5))
+        }else{
+            newPost(title: titlePostTxt.text!, description: textPostTxt.text!, status: isReadyToPublish, author: user.email!)
+
+        }
     }
     
     
@@ -126,18 +133,37 @@ extension NewPostController {
         
         let post : [String : Any] = ["title" : title, "description" : description, "status": status, "author" : author]
         let recordInFB = ["\(key)" : post]
-
-        postRef.child("articulos").updateChildValues(recordInFB)
         
-        if let _ = imgData{
-            self.uploadMedia(data: imgData, name: key, completionHandler: { (urlDownload) in
-                guard let urlImage = urlDownload else {return}
-                let urlToPost = ["urlImage" : urlImage]
-                self.postRef.child("articulos").child(key).updateChildValues(urlToPost)
+        self.loader.startAnimating()
+        self.loader.isHidden = false
+        self.view.isUserInteractionEnabled = false
+        postRef.child("articulos").updateChildValues(recordInFB, withCompletionBlock: { (error, reference) in
+            if let _ = error {
+                self.showAlert(message: "Error al grabar el post, inténtalo de nuevo.")
+                return
+            }
+            // Si tenemos imagen la subimos
+            if let _ = imgData{
+                self.uploadMedia(data: imgData, name: key, completionHandler: { (urlDownload) in
+                    guard let urlImage = urlDownload else {return}
+                    let urlToPost = ["urlImage" : urlImage]
+                    self.postRef.child("articulos").child(key).updateChildValues(urlToPost)
+                    self.loader.stopAnimating()
+                    self.loader.isHidden = true
+                    self.view.isUserInteractionEnabled = true
+
+                    self.navigationController?.popViewController(animated: true)
+                })
+            }else{
+                self.loader.stopAnimating()
+                self.loader.isHidden = true
+                self.view.isUserInteractionEnabled = true
                 self.navigationController?.popViewController(animated: true)
-            })
-            
-        }
+                
+            }
+
+        })
+        
         
     }
     
