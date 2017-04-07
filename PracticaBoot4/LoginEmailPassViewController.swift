@@ -1,18 +1,18 @@
 //
-//  CreateUserViewController.swift
+//  LoginEmailPassViewController.swift
 //  Scoops
 //
-//  Created by Jose Javier Montes Romero on 6/4/17.
+//  Created by Jose Javier Montes Romero on 7/4/17.
 //  Copyright © 2017 COM. All rights reserved.
 //
 
 import UIKit
 import Firebase
 
-class CreateUserViewController: UIViewController {
+class LoginEmailPassViewController: UIViewController {
 
     @IBOutlet weak var emailText: UITextField!
-    @IBOutlet weak var passText: UITextField!
+    @IBOutlet weak var passTxt: UITextField!
     
     
     override func viewDidLoad() {
@@ -22,10 +22,10 @@ class CreateUserViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-
-    @IBAction func doRegistro(_ sender: Any) {
+   
+    @IBAction func doLogin(_ sender: Any) {
         
-        guard let email = emailText.text, let pass = passText.text else {
+        guard let email = emailText.text, let pass = passTxt.text else{
             self.showAlert(message: "Rellena todos los campos")
             return
         }
@@ -35,21 +35,18 @@ class CreateUserViewController: UIViewController {
             return
         }
         
-        FIRAuth.auth()?.createUser(withEmail: email, password: pass, completion: { (user, error) in
+        FIRAuth.auth()?.signIn(withEmail: email, password: pass, completion: { (user, error) in
             if let _ = error {
-                print(error?.localizedDescription)
                 self.showAlert(message: (error?.localizedDescription)!)
-                return
             }else{
-                print("\(user?.email)")
-                self.performSegue(withIdentifier: "registroOk", sender: nil)
+                print(user?.email)
+                self.performSegue(withIdentifier: "loginOk", sender: nil)
             }
         })
-
         
     }
-    
 
+    
     func showAlert(message : String) {
         
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
@@ -59,8 +56,8 @@ class CreateUserViewController: UIViewController {
         }))
         
         self.present(alert, animated: true, completion: nil)
+
         
     }
-
 
 }

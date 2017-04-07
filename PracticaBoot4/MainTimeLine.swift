@@ -14,6 +14,8 @@ class MainTimeLine: UITableViewController {
     var postRef : FIRDatabaseReference!
     var handle: FIRAuthStateDidChangeListenerHandle!
 
+    @IBOutlet weak var btnMisPosts: UIBarButtonItem!
+    
 
     var model : [Posts] = []
     let cellIdentier = "POSTSCELL"
@@ -41,11 +43,17 @@ class MainTimeLine: UITableViewController {
         pullModel()
         refreshControl.endRefreshing()
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
+
+    @IBAction func doLogout(_ sender: Any) {
+        makeLogout()
+        performSegue(withIdentifier: "doLogout", sender: nil)
+        
+    }
+    
+    
+    
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -99,10 +107,16 @@ extension MainTimeLine {
         
         handle = FIRAuth.auth()?.addStateDidChangeListener({ (auth, user) in
             guard let user = user else {return}
+            
             if (user.isAnonymous){
                 print("El usuario ANONIMO logado es \(user.uid)")
+                self.btnMisPosts.isEnabled = false
+                self.title = "Anónimo"
             }else{
                 print("El usuario logado es \(user.uid)")
+                self.btnMisPosts.isEnabled = true
+
+                self.title = user.email
             }
         })
         
@@ -149,6 +163,18 @@ extension MainTimeLine {
         }
         
         
+    }
+    
+    
+
+    func makeLogout() {
+        if let _ = FIRAuth.auth()?.currentUser {
+            do{
+                try FIRAuth.auth()?.signOut()
+            }catch let error {
+                print(error)
+            }
+        }
     }
     
     

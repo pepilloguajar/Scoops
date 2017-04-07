@@ -31,6 +31,7 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
 
         setupFirebaseReferences()
         
