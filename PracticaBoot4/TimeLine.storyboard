@@ -99,6 +99,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
+                    <connections>
+                        <segue destination="pt0-t6-Lxi" kind="show" identifier="detailPost" id="9Q6-b8-gd8"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="peu-K4-xFZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -515,6 +518,168 @@
             </objects>
             <point key="canvasLocation" x="2010" y="1026"/>
         </scene>
+        <!--Detail Post View Controller-->
+        <scene sceneID="jt4-uh-sSh">
+            <objects>
+                <viewController id="pt0-t6-Lxi" customClass="detailPostViewController" customModule="Scoops" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="b7u-h2-b8c"/>
+                        <viewControllerLayoutGuide type="bottom" id="em1-7d-FyE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Zao-Qa-ez4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ucn-jK-cqS">
+                                <rect key="frame" x="24" y="80" width="272" height="32"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Título: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EbP-Vh-2i9">
+                                        <rect key="frame" x="0.0" y="0.0" width="52.5" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="JBM-jl-NQS"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UaA-sm-LLm">
+                                        <rect key="frame" x="60.5" y="0.0" width="211.5" height="32"/>
+                                        <accessibility key="accessibilityConfiguration" hint="Email"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="UaA-sm-LLm" firstAttribute="height" secondItem="EbP-Vh-2i9" secondAttribute="height" id="Kfw-vH-OSd"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="EI7-jc-vlP">
+                                <rect key="frame" x="24" y="128" width="272" height="200"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descripción:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eov-mK-O6E">
+                                        <rect key="frame" x="0.0" y="0.0" width="272" height="32"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="cQd-TJ-Pn6">
+                                        <rect key="frame" x="0.0" y="40" width="272" height="160"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="160" id="7Z7-lp-Hzl"/>
+                                        </constraints>
+                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cch-dr-m1e">
+                                <rect key="frame" x="24" y="344" width="272" height="32"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Num. Visualizaciones: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hVA-dU-fpp">
+                                        <rect key="frame" x="0.0" y="0.0" width="172" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="c8Z-WL-yxR"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qqx-Fm-Cyq">
+                                        <rect key="frame" x="180" y="0.0" width="92" height="32"/>
+                                        <accessibility key="accessibilityConfiguration" hint="Email"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="qqx-Fm-Cyq" firstAttribute="height" secondItem="hVA-dU-fpp" secondAttribute="height" id="IIW-TU-vUm"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="yMJ-4j-1g8">
+                                <rect key="frame" x="24" y="400" width="272" height="32"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Num. Valoraciones: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SqE-4Y-5zf">
+                                        <rect key="frame" x="0.0" y="0.0" width="152.5" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="9lS-cQ-4Tv"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tOi-GN-YRB">
+                                        <rect key="frame" x="160.5" y="0.0" width="111.5" height="32"/>
+                                        <accessibility key="accessibilityConfiguration" hint="Email"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="tOi-GN-YRB" firstAttribute="height" secondItem="SqE-4Y-5zf" secondAttribute="height" id="naX-Ie-pL3"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ctY-4Y-KyO">
+                                <rect key="frame" x="24" y="451" width="272" height="32"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Valoración média: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2q8-GZ-yGR">
+                                        <rect key="frame" x="0.0" y="0.0" width="140" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="Sey-mW-k1y"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZAQ-E2-ea7">
+                                        <rect key="frame" x="148" y="0.0" width="124" height="32"/>
+                                        <accessibility key="accessibilityConfiguration" hint="Email"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ZAQ-E2-ea7" firstAttribute="height" secondItem="2q8-GZ-yGR" secondAttribute="height" id="HEU-VP-ooj"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Ucn-jK-cqS" firstAttribute="leading" secondItem="Zao-Qa-ez4" secondAttribute="leadingMargin" constant="8" id="1AQ-VL-MzK"/>
+                            <constraint firstItem="cch-dr-m1e" firstAttribute="top" secondItem="cQd-TJ-Pn6" secondAttribute="bottom" constant="16" id="1fa-5U-kDh"/>
+                            <constraint firstItem="Eov-mK-O6E" firstAttribute="height" secondItem="UaA-sm-LLm" secondAttribute="height" id="3pd-TS-tco"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="yMJ-4j-1g8" secondAttribute="trailing" constant="8" id="7GH-gQ-LGv"/>
+                            <constraint firstItem="EI7-jc-vlP" firstAttribute="leading" secondItem="Zao-Qa-ez4" secondAttribute="leadingMargin" constant="8" id="BSf-Ls-9Yg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ctY-4Y-KyO" secondAttribute="trailing" constant="8" id="Eq7-uX-L22"/>
+                            <constraint firstItem="2q8-GZ-yGR" firstAttribute="top" secondItem="yMJ-4j-1g8" secondAttribute="bottom" constant="16" id="IMG-5N-8f9"/>
+                            <constraint firstItem="Ucn-jK-cqS" firstAttribute="top" secondItem="b7u-h2-b8c" secondAttribute="bottom" constant="16" id="JeK-Rc-Bzg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Ucn-jK-cqS" secondAttribute="trailing" constant="8" id="LIY-7i-VEe"/>
+                            <constraint firstItem="yMJ-4j-1g8" firstAttribute="leading" secondItem="Zao-Qa-ez4" secondAttribute="leadingMargin" constant="8" id="NkL-F6-Twi"/>
+                            <constraint firstItem="EI7-jc-vlP" firstAttribute="top" secondItem="Ucn-jK-cqS" secondAttribute="bottom" constant="16" id="QJS-OF-vfb"/>
+                            <constraint firstItem="SqE-4Y-5zf" firstAttribute="top" secondItem="cch-dr-m1e" secondAttribute="bottom" constant="16" id="d59-Mt-G85"/>
+                            <constraint firstItem="ctY-4Y-KyO" firstAttribute="leading" secondItem="Zao-Qa-ez4" secondAttribute="leadingMargin" constant="8" id="f2I-kr-M4g"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="cch-dr-m1e" secondAttribute="trailing" constant="8" id="jLe-e4-Td0"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="EI7-jc-vlP" secondAttribute="trailing" constant="8" id="kQp-mm-zT2"/>
+                            <constraint firstItem="cch-dr-m1e" firstAttribute="leading" secondItem="Zao-Qa-ez4" secondAttribute="leadingMargin" constant="8" id="rOd-Gb-DRg"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="descriptionText" destination="cQd-TJ-Pn6" id="hvJ-My-y5R"/>
+                        <outlet property="nMedia" destination="ZAQ-E2-ea7" id="hqM-rC-Kr3"/>
+                        <outlet property="nValoraciones" destination="tOi-GN-YRB" id="sUT-kN-WvR"/>
+                        <outlet property="nVisualizaciones" destination="qqx-Fm-Cyq" id="vKf-uS-dDF"/>
+                        <outlet property="titleText" destination="UaA-sm-LLm" id="WEh-hs-I90"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sqh-fa-Xzh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3004" y="1025"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Sf0-r5-mKP">
             <objects>
@@ -617,6 +782,6 @@
         <image name="iTunesArtwork.png" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Xnw-z1-qD2"/>
+        <segue reference="TKa-it-ulS"/>
     </inferredMetricsTieBreakers>
 </document>

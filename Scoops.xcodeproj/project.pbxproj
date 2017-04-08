@@ -21,6 +21,7 @@
 		9223BA4F1E96766800C3B923 /* iTunesArtwork@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9223BA4E1E96766800C3B923 /* iTunesArtwork@3x.png */; };
 		9225C3601E968CDA00692545 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9225C35F1E968CDA00692545 /* LoginViewController.swift */; };
 		9225C36A1E96A62400692545 /* CreateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9225C3691E96A62400692545 /* CreateUserViewController.swift */; };
+		92C8DA6C1E990AF600510258 /* detailPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C8DA6B1E990AF600510258 /* detailPostViewController.swift */; };
 		92EBEA8C1E97CA4D008931DF /* LoginEmailPassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EBEA8B1E97CA4D008931DF /* LoginEmailPassViewController.swift */; };
 		92EBEA911E97E393008931DF /* ExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EBEA901E97E393008931DF /* ExtensionViewController.swift */; };
 /* End PBXBuildFile section */
@@ -43,6 +44,7 @@
 		9223BA4E1E96766800C3B923 /* iTunesArtwork@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@3x.png"; sourceTree = "<group>"; };
 		9225C35F1E968CDA00692545 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9225C3691E96A62400692545 /* CreateUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateUserViewController.swift; sourceTree = "<group>"; };
+		92C8DA6B1E990AF600510258 /* detailPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = detailPostViewController.swift; sourceTree = "<group>"; };
 		92EBEA8B1E97CA4D008931DF /* LoginEmailPassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginEmailPassViewController.swift; sourceTree = "<group>"; };
 		92EBEA901E97E393008931DF /* ExtensionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionViewController.swift; sourceTree = "<group>"; };
 		E8A4C264289D511C58A16017 /* Pods_Scoops.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Scoops.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,6 +146,7 @@
 			children = (
 				5D931D041E83F773005051E9 /* AuthorPostList.swift */,
 				5D931D061E83F7BA005051E9 /* NewPostController.swift */,
+				92C8DA6B1E990AF600510258 /* detailPostViewController.swift */,
 			);
 			name = "Auth Users";
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 				9225C3601E968CDA00692545 /* LoginViewController.swift in Sources */,
 				5D931D051E83F773005051E9 /* AuthorPostList.swift in Sources */,
 				9223BA4D1E96356D00C3B923 /* Posts.swift in Sources */,
+				92C8DA6C1E990AF600510258 /* detailPostViewController.swift in Sources */,
 				9225C36A1E96A62400692545 /* CreateUserViewController.swift in Sources */,
 				5D931CE61E83EEEA005051E9 /* AppDelegate.swift in Sources */,
 				5D931D031E83F67C005051E9 /* PostReview.swift in Sources */,

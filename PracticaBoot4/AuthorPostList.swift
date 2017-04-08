@@ -123,6 +123,10 @@ class AuthorPostList: UITableViewController {
             return [publish, deleteRow]
         }
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "detailPost", sender: indexPath)
+    }
 
    
 
@@ -132,6 +136,10 @@ class AuthorPostList: UITableViewController {
         if segue.identifier == "addNewPost"{
             let vc = segue.destination as! NewPostController
             vc.user = self.user
+        }else if segue.identifier == "detailPost"{
+            let vc = segue.destination as! detailPostViewController
+            let index = (sender as! IndexPath).row
+            vc.model = self.model[index]
         }
     }
 
