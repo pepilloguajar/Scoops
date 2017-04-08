@@ -67,14 +67,61 @@ class AuthorPostList: UITableViewController {
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
+        let ref = self.model[indexPath.row].refInCloud
+
+        
         let publish = UITableViewRowAction(style: .normal, title: "Publicar") { (action, indexPath) in
             // Codigo para publicar el post
+            ref?.updateChildValues(["status" : true], withCompletionBlock: { (error, ref) in
+                if let _ = error{
+                    self.showAlert(message: "Error al eliminar una noticia")
+                }
+                self.model[indexPath.row].status = true
+                self.tableView.reloadData()
+
+            })
+            self.tableView.cellForRow(at: indexPath)?.reloadInputViews()
+
         }
         publish.backgroundColor = UIColor.green
+        
+        let unPublish = UITableViewRowAction(style: .normal, title: "Despublicar") { (action, indexPath) in
+            // Codigo para publicar el post
+            ref?.updateChildValues(["status" : false], withCompletionBlock: { (error, ref) in
+                if let _ = error{
+                    self.showAlert(message: "Error al eliminar una noticia")
+                }
+                self.model[indexPath.row].status = false
+                self.tableView.reloadData()
+                
+            })
+            self.tableView.cellForRow(at: indexPath)?.reloadInputViews()
+
+            
+            
+        }
+        unPublish.backgroundColor = UIColor.orange
+        
         let deleteRow = UITableViewRowAction(style: .destructive, title: "Eliminar") { (action, indexPath) in
             // codigo para eliminar
+            ref?.removeValue(completionBlock: { (error, ref) in
+                if let _ = error{
+                    self.showAlert(message: "Error al eliminar una noticia")
+                    return
+                }
+                self.model.remove(at: indexPath.row)
+                self.tableView.reloadData()
+            })
+            self.tableView.cellForRow(at: indexPath)?.reloadInputViews()
+
+            
         }
-        return [publish, deleteRow]
+
+        if self.model[indexPath.row].status {
+            return [unPublish, deleteRow]
+        }else{
+            return [publish, deleteRow]
+        }
     }
 
    
